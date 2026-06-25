@@ -1,210 +1,204 @@
 <!doctype html>
 <html lang="zh-CN">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>点淘 AI 每日穿搭 Demo</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>点淘 AI 风格分身 Demo</title>
   <style>
     :root {
-      --ink: #15120d;
-      --muted: #766f66;
-      --soft: #f7f0e5;
-      --paper: #fffaf2;
-      --card: #ffffff;
-      --line: rgba(21, 18, 13, .1);
-      --orange: #ff7d3b;
-      --yellow: #ffd86c;
-      --green: #dff3dd;
-      --blue: #dfeeff;
-      --red: #ffe5dc;
-      --shadow: 0 18px 46px rgba(21, 18, 13, .18);
-      --r12: 12px;
-      --r20: 20px;
-      --r28: 28px;
+      --ink: #171717;
+      --muted: #6f6f6f;
+      --line: rgba(23, 23, 23, 0.1);
+      --paper: #fbfaf6;
+      --soft: #f3f1ea;
+      --lime: #dfff5f;
+      --blue: #d9ecff;
+      --rose: #ffe0dc;
+      --green: #dff5e7;
+      --shadow: 0 22px 70px rgba(35, 31, 25, 0.18);
+      --radius: 22px;
     }
 
     * { box-sizing: border-box; }
 
-    html,
     body {
       margin: 0;
-      min-height: 100%;
-      color: var(--ink);
-      font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
-      letter-spacing: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
       background:
-        radial-gradient(circle at 14% 18%, rgba(255, 125, 59, .18), transparent 30%),
-        radial-gradient(circle at 88% 18%, rgba(91, 126, 238, .14), transparent 30%),
-        linear-gradient(135deg, #e9dfcf, #d9d4cc);
+        radial-gradient(circle at 22% 16%, rgba(223, 255, 95, 0.34), transparent 26%),
+        radial-gradient(circle at 84% 8%, rgba(217, 236, 255, 0.6), transparent 22%),
+        linear-gradient(135deg, #f6f1e8, #eef2ee 52%, #f7f0f4);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+      letter-spacing: 0;
     }
 
     button {
       font: inherit;
       color: inherit;
       border: 0;
-      background: none;
       cursor: pointer;
       -webkit-tap-highlight-color: transparent;
     }
 
     .stage {
+      width: min(100vw, 980px);
       min-height: 100vh;
       display: grid;
       place-items: center;
-      padding: 28px;
+      padding: 26px;
     }
 
     .phone {
+      position: relative;
       width: 390px;
       height: 844px;
-      position: relative;
-      overflow: hidden;
-      border: 10px solid #101010;
+      border: 10px solid #111;
       border-radius: 46px;
-      background: var(--soft);
+      background: #fffdf8;
       box-shadow: var(--shadow);
+      overflow: hidden;
     }
 
     .phone::before {
       content: "";
       position: absolute;
-      z-index: 30;
-      top: 11px;
+      top: 8px;
       left: 50%;
       width: 118px;
-      height: 30px;
+      height: 28px;
       transform: translateX(-50%);
-      border-radius: 999px;
-      background: #101010;
+      border-radius: 0 0 18px 18px;
+      background: #111;
+      z-index: 20;
     }
 
     .app {
       height: 100%;
       display: grid;
-      grid-template-rows: 124px 1fr 86px;
-      background: var(--soft);
+      grid-template-rows: 44px 66px 1fr 76px;
+      background: linear-gradient(180deg, #fffef9 0%, #f7f5ee 54%, #fffdf8 100%);
     }
 
-    .topbar {
-      position: relative;
-      z-index: 2;
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 12px;
+    .status {
+      display: flex;
       align-items: end;
-      padding: 58px 18px 10px;
-      background: rgba(247, 240, 229, .92);
+      justify-content: space-between;
+      padding: 12px 24px 4px;
+      font-size: 13px;
+      font-weight: 800;
+      z-index: 22;
     }
 
-    .eyebrow {
-      margin: 0 0 3px;
+    .top {
+      padding: 14px 18px 10px;
+      display: grid;
+      gap: 12px;
+      border-bottom: 1px solid rgba(23, 23, 23, 0.06);
+      background: rgba(255, 253, 248, 0.9);
+      backdrop-filter: blur(18px);
+      z-index: 10;
+    }
+
+    .head {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 12px;
+    }
+
+    .title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .avatar {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      overflow: hidden;
+      background: var(--soft);
+      border: 2px solid #fff;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+      flex: 0 0 auto;
+    }
+
+    .avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .title h1 {
+      margin: 0;
+      font-size: 20px;
+      line-height: 1.1;
+      letter-spacing: 0;
+    }
+
+    .title p {
+      margin: 3px 0 0;
       color: var(--muted);
       font-size: 11px;
-      font-weight: 800;
-      line-height: 1;
-    }
-
-    h1 {
-      margin: 0;
-      font-size: 21px;
-      line-height: 1.08;
-      font-weight: 950;
-    }
-
-    .context {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 4px;
-      min-width: 104px;
-    }
-
-    .context strong {
-      padding: 7px 10px;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      background: var(--card);
-      font-size: 12px;
-      line-height: 1;
-      box-shadow: 0 6px 14px rgba(21, 18, 13, .06);
+      line-height: 1.1;
       white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 286px;
     }
 
     .content {
-      min-height: 0;
       overflow-y: auto;
-      padding: 0 16px 14px;
+      overscroll-behavior: contain;
+      padding: 14px 16px 96px;
       scrollbar-width: none;
     }
 
     .content::-webkit-scrollbar { display: none; }
 
+    .screen { display: none; }
+    .screen.active {
+      display: grid;
+      gap: 12px;
+      animation: in 180ms ease-out;
+    }
+
+    @keyframes in {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-card,
+    .card,
+    .panel {
+      border-radius: var(--radius);
+      border: 1px solid rgba(23, 23, 23, 0.08);
+      background: rgba(255, 255, 255, 0.82);
+      box-shadow: 0 14px 34px rgba(24, 24, 24, 0.07);
+    }
+
     .hero-card {
-      position: relative;
       overflow: hidden;
-      min-height: 446px;
-      border-radius: 30px;
-      background: #d8d0c7;
-      box-shadow: 0 12px 28px rgba(21, 18, 13, .12);
+      min-height: 278px;
+      position: relative;
+      background: #ebe7dc;
     }
 
-    .hero-card img {
+    .hero-img {
       width: 100%;
-      height: 446px;
-      display: block;
+      height: 278px;
       object-fit: cover;
-      transition: opacity .2s ease, transform .2s ease;
-    }
-
-    .hero-card.switching img {
-      opacity: .28;
-      transform: scale(.985);
+      display: block;
     }
 
     .hero-shade {
       position: absolute;
       inset: 0;
-      background:
-        linear-gradient(180deg, rgba(0,0,0,.22), transparent 24%),
-        linear-gradient(0deg, rgba(0,0,0,.54), transparent 44%);
-      pointer-events: none;
-    }
-
-    .hero-top {
-      position: absolute;
-      top: 12px;
-      left: 12px;
-      right: 12px;
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 10px;
-    }
-
-    .style-chip {
-      display: inline-flex;
-      align-items: center;
-      min-height: 30px;
-      padding: 7px 10px;
-      border: 1px solid rgba(255,255,255,.42);
-      border-radius: 999px;
-      background: rgba(255,255,255,.78);
-      backdrop-filter: blur(14px);
-      font-size: 12px;
-      font-weight: 900;
-    }
-
-    .fit-score {
-      width: 58px;
-      height: 58px;
-      display: grid;
-      place-items: center;
-      border-radius: 18px;
-      background: rgba(255, 216, 108, .94);
-      border: 1px solid rgba(21, 18, 13, .14);
-      box-shadow: 0 12px 24px rgba(21, 18, 13, .16);
-      font-size: 19px;
-      font-weight: 1000;
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.03), transparent 40%, rgba(0, 0, 0, 0.58));
     }
 
     .hero-copy {
@@ -212,749 +206,1025 @@
       left: 16px;
       right: 16px;
       bottom: 16px;
-      color: #fff;
+      color: white;
+      display: grid;
+      gap: 8px;
     }
 
-    .hero-copy h2 {
-      margin: 0 0 8px;
-      font-size: 25px;
-      line-height: 1.12;
-      font-weight: 1000;
-      text-shadow: 0 2px 14px rgba(0,0,0,.22);
+    .eyebrow {
+      width: fit-content;
+      padding: 6px 9px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.22);
+      backdrop-filter: blur(12px);
+      font-size: 11px;
+      font-weight: 850;
+    }
+
+    .hero-copy h2,
+    .section-title h2 {
+      margin: 0;
+      font-size: 24px;
+      line-height: 1.08;
+      letter-spacing: 0;
     }
 
     .hero-copy p {
       margin: 0;
-      max-width: 295px;
-      color: rgba(255,255,255,.9);
+      max-width: 290px;
       font-size: 13px;
-      line-height: 1.45;
-      font-weight: 650;
+      line-height: 1.42;
+      color: rgba(255, 255, 255, 0.86);
     }
 
-    .scene-row {
+    .quick-row {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 8px;
-      margin: 12px 0;
     }
 
-    .scene-btn {
-      min-height: 38px;
-      border-radius: 999px;
-      border: 1px solid var(--line);
-      background: var(--card);
-      font-size: 13px;
-      font-weight: 900;
-      box-shadow: 0 7px 16px rgba(21, 18, 13, .06);
-    }
-
-    .scene-btn[aria-pressed="true"] {
-      color: #fff;
-      background: var(--ink);
-      border-color: var(--ink);
-    }
-
-    .ai-card {
-      padding: 15px;
-      border: 1px solid var(--line);
-      border-radius: 24px;
-      background: var(--paper);
-      box-shadow: 0 12px 26px rgba(21, 18, 13, .08);
-    }
-
-    .ai-card-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 12px;
-    }
-
-    .ai-card-head b {
-      font-size: 15px;
-    }
-
-    .ai-card-head span {
-      padding: 5px 8px;
-      border-radius: 999px;
-      background: var(--green);
-      color: #315339;
-      font-size: 11px;
-      font-weight: 900;
-      white-space: nowrap;
-    }
-
-    .reason-stack {
-      display: grid;
-      gap: 9px;
-    }
-
-    .reason-pill {
-      display: grid;
-      grid-template-columns: 28px 1fr;
-      gap: 9px;
-      align-items: start;
+    .metric {
+      min-height: 74px;
       padding: 10px;
       border-radius: 18px;
-      background: var(--card);
-      border: 1px solid var(--line);
+      background: #fff;
+      border: 1px solid rgba(23, 23, 23, 0.07);
     }
 
-    .reason-pill i {
-      width: 28px;
-      height: 28px;
-      display: grid;
-      place-items: center;
-      border-radius: 10px;
-      background: var(--yellow);
-      font-style: normal;
-      font-size: 12px;
-      font-weight: 1000;
-    }
-
-    .reason-pill b {
+    .metric strong {
       display: block;
-      margin-bottom: 2px;
-      font-size: 12px;
-      line-height: 1.2;
+      font-size: 18px;
+      line-height: 1;
     }
 
-    .reason-pill span {
+    .metric span {
       display: block;
-      color: #514b43;
-      font-size: 12px;
-      line-height: 1.42;
-    }
-
-    .reason-pill.blue i { background: var(--blue); }
-    .reason-pill.red i { background: var(--red); }
-
-    .open-sheet {
-      width: 100%;
-      min-height: 42px;
-      margin-top: 12px;
-      border-radius: 16px;
-      color: #fff;
-      background: var(--ink);
-      font-size: 14px;
-      font-weight: 950;
-    }
-
-    .bento-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin: 18px 2px 10px;
-    }
-
-    .bento-head b {
-      font-size: 15px;
-    }
-
-    .bento-head span {
+      margin-top: 6px;
       color: var(--muted);
+      font-size: 11px;
+      line-height: 1.25;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 4px;
+    }
+
+    .section-title h2 {
+      color: #1f1f1f;
+      font-size: 18px;
+    }
+
+    .section-title p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.3;
+    }
+
+    .pill-row {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 2px;
+      scrollbar-width: none;
+    }
+
+    .pill-row::-webkit-scrollbar { display: none; }
+
+    .pill {
+      white-space: nowrap;
+      min-height: 34px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: #fff;
+      border: 1px solid rgba(23, 23, 23, 0.09);
+      color: #555;
+      font-size: 12px;
+      font-weight: 780;
+    }
+
+    .pill.active {
+      color: #111;
+      background: var(--lime);
+      border-color: rgba(23, 23, 23, 0.16);
+    }
+
+    .card {
+      padding: 14px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .style-map {
+      display: grid;
+      gap: 10px;
+    }
+
+    .bar {
+      display: grid;
+      grid-template-columns: 76px 1fr 38px;
+      align-items: center;
+      gap: 8px;
       font-size: 12px;
       font-weight: 800;
     }
 
-    .look-strip {
-      display: flex;
-      gap: 10px;
-      overflow-x: auto;
-      padding: 0 2px 4px;
-      scrollbar-width: none;
-    }
-
-    .look-strip::-webkit-scrollbar { display: none; }
-
-    .look-card {
-      flex: 0 0 112px;
+    .bar-track {
+      height: 10px;
       overflow: hidden;
-      border: 2px solid transparent;
-      border-radius: 22px;
-      background: var(--card);
-      box-shadow: 0 8px 20px rgba(21, 18, 13, .08);
-      text-align: left;
+      border-radius: 999px;
+      background: #ece9df;
     }
 
-    .look-card[aria-pressed="true"] {
-      border-color: var(--orange);
+    .bar-fill {
+      height: 100%;
+      width: var(--w);
+      border-radius: 999px;
+      background: var(--c);
     }
 
-    .look-card img {
+    .compare-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .compare {
+      min-width: 0;
+      position: relative;
+      overflow: hidden;
+      border-radius: 18px;
+      background: #eee;
+      border: 1px solid rgba(23, 23, 23, 0.08);
+    }
+
+    .compare img {
       width: 100%;
-      height: 132px;
-      display: block;
+      height: 128px;
       object-fit: cover;
+      display: block;
     }
 
-    .look-card span {
-      display: block;
-      padding: 8px 9px 9px;
-      font-size: 12px;
-      line-height: 1.25;
+    .compare .tag {
+      position: absolute;
+      left: 7px;
+      top: 7px;
+      padding: 5px 7px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.84);
+      font-size: 10px;
       font-weight: 900;
     }
 
-    .bottom-bar {
+    .compare b {
+      display: block;
+      padding: 8px 8px 0;
+      font-size: 12px;
+      line-height: 1.2;
+    }
+
+    .compare p {
+      margin: 4px 8px 9px;
+      min-height: 32px;
+      color: var(--muted);
+      font-size: 10px;
+      line-height: 1.25;
+    }
+
+    .feature-grid {
       display: grid;
-      grid-template-columns: 1fr 52px 52px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+    }
+
+    .feature {
+      min-height: 54px;
+      padding: 10px;
+      border-radius: 16px;
+      background: #fff;
+      border: 1px solid rgba(23, 23, 23, 0.08);
+    }
+
+    .feature b {
+      display: block;
+      font-size: 12px;
+    }
+
+    .feature span {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 10px;
+      line-height: 1.25;
+    }
+
+    .today-card {
+      display: grid;
+      grid-template-columns: 46% 1fr;
+      gap: 12px;
+      padding: 12px;
+      align-items: stretch;
+    }
+
+    .today-img {
+      min-height: 258px;
+      border-radius: 19px;
+      overflow: hidden;
+      background: #e9e5d9;
+    }
+
+    .today-img img {
+      width: 100%;
+      height: 100%;
+      min-height: 258px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .today-info {
+      display: grid;
+      align-content: space-between;
       gap: 10px;
-      align-items: center;
-      padding: 10px 16px 18px;
-      border-top: 1px solid rgba(21, 18, 13, .08);
-      background: rgba(255, 250, 242, .92);
+      min-width: 0;
+    }
+
+    .score {
+      width: 56px;
+      height: 56px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--lime);
+      border: 2px solid #111;
+      font-weight: 950;
+      font-size: 21px;
+    }
+
+    .today-info h2 {
+      margin: 0;
+      font-size: 21px;
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    .today-info p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.4;
+    }
+
+    .mini-list {
+      display: grid;
+      gap: 7px;
+    }
+
+    .mini {
+      display: grid;
+      grid-template-columns: 7px 1fr;
+      gap: 7px;
+      align-items: start;
+      color: #3c3c3c;
+      font-size: 11px;
+      line-height: 1.3;
+    }
+
+    .dot {
+      width: 7px;
+      height: 7px;
+      margin-top: 4px;
+      border-radius: 50%;
+      background: #111;
+    }
+
+    .cta {
+      height: 42px;
+      border-radius: 999px;
+      background: #111;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 900;
+      box-shadow: 0 10px 22px rgba(0, 0, 0, 0.16);
+    }
+
+    .secondary {
+      height: 38px;
+      border-radius: 999px;
+      background: #fff;
+      border: 1px solid rgba(23, 23, 23, 0.11);
+      font-size: 12px;
+      font-weight: 850;
+    }
+
+    .closet-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+    .closet {
+      padding: 10px;
+      border-radius: 16px;
+      background: #fff;
+      border: 1px solid rgba(23, 23, 23, 0.08);
+    }
+
+    .closet b {
+      display: block;
+      font-size: 12px;
+    }
+
+    .closet span {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 10px;
+      line-height: 1.2;
+    }
+
+    .feed {
+      display: grid;
+      gap: 12px;
+    }
+
+    .life-card {
+      overflow: hidden;
+      padding: 0;
+    }
+
+    .life-img {
+      height: 258px;
+      position: relative;
+      background: #e8e2d7;
+      overflow: hidden;
+    }
+
+    .life-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .life-gradient {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0.04), transparent 42%, rgba(0,0,0,0.64));
+    }
+
+    .life-label {
+      position: absolute;
+      left: 14px;
+      right: 14px;
+      bottom: 14px;
+      color: #fff;
+    }
+
+    .life-label h2 {
+      margin: 0;
+      font-size: 22px;
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    .life-label p {
+      margin: 6px 0 0;
+      color: rgba(255, 255, 255, 0.84);
+      font-size: 12px;
+      line-height: 1.35;
+    }
+
+    .life-body {
+      display: grid;
+      gap: 11px;
+      padding: 13px;
+    }
+
+    .life-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .chips {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .chip {
+      padding: 6px 8px;
+      border-radius: 999px;
+      background: #f2f0ea;
+      color: #595852;
+      font-size: 10px;
+      font-weight: 800;
+    }
+
+    .bottom-nav {
+      position: relative;
+      z-index: 12;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      padding: 10px 16px 16px;
+      border-top: 1px solid rgba(23, 23, 23, 0.07);
+      background: rgba(255, 253, 248, 0.9);
       backdrop-filter: blur(18px);
     }
 
-    .primary {
-      min-height: 48px;
+    .nav-btn {
+      height: 48px;
       border-radius: 18px;
-      color: #fff;
-      background: var(--ink);
-      font-size: 15px;
-      font-weight: 950;
-    }
-
-    .icon-btn {
-      min-height: 48px;
-      border-radius: 18px;
-      border: 1px solid var(--line);
-      background: var(--card);
-      font-size: 20px;
+      display: grid;
+      place-items: center;
+      background: #f0eee7;
+      color: #5c5a55;
+      font-size: 11px;
       font-weight: 900;
     }
 
-    .sheet-backdrop {
-      position: absolute;
-      inset: 0;
-      z-index: 40;
-      display: none;
-      background: rgba(21, 18, 13, .28);
+    .nav-btn.active {
+      background: #111;
+      color: #fff;
     }
 
-    .sheet-backdrop.open {
-      display: block;
-    }
-
-    .sheet {
+    .drawer {
       position: absolute;
       left: 0;
       right: 0;
       bottom: 0;
-      max-height: 72%;
+      z-index: 40;
       padding: 12px 16px 18px;
+      background: rgba(255, 253, 248, 0.97);
       border-radius: 28px 28px 0 0;
-      background: var(--paper);
-      box-shadow: 0 -18px 46px rgba(21, 18, 13, .22);
-      transform: translateY(105%);
-      transition: transform .24s ease;
+      border-top: 1px solid rgba(23, 23, 23, 0.1);
+      box-shadow: 0 -18px 50px rgba(0, 0, 0, 0.18);
+      transform: translateY(108%);
+      transition: transform 220ms ease;
     }
 
-    .sheet-backdrop.open .sheet {
-      transform: translateY(0);
-    }
+    .drawer.open { transform: translateY(0); }
 
-    .grabber {
-      width: 42px;
+    .handle {
+      width: 46px;
       height: 5px;
-      margin: 0 auto 14px;
       border-radius: 999px;
-      background: rgba(21, 18, 13, .18);
+      background: rgba(23, 23, 23, 0.18);
+      margin: 0 auto 12px;
     }
 
-    .sheet h3 {
-      margin: 0 0 12px;
-      font-size: 20px;
-      line-height: 1.15;
+    .drawer-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      gap: 12px;
+      margin-bottom: 12px;
     }
 
-    .sheet-grid {
-      display: grid;
-      gap: 10px;
-    }
-
-    .sheet-item {
-      padding: 12px;
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      background: var(--card);
-    }
-
-    .sheet-item b {
-      display: block;
-      margin-bottom: 4px;
-      font-size: 13px;
-    }
-
-    .sheet-item p {
+    .drawer h2 {
       margin: 0;
-      color: #514b43;
-      font-size: 13px;
-      line-height: 1.5;
+      font-size: 19px;
+      line-height: 1.12;
+      letter-spacing: 0;
     }
 
-    .close-sheet {
-      width: 100%;
-      min-height: 44px;
-      margin-top: 12px;
-      border-radius: 16px;
-      background: var(--ink);
-      color: #fff;
-      font-weight: 950;
+    .drawer p {
+      margin: 5px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.35;
     }
 
-    .toast {
-      position: absolute;
-      left: 50%;
-      bottom: 98px;
-      z-index: 50;
-      transform: translateX(-50%) translateY(14px);
-      opacity: 0;
-      pointer-events: none;
-      min-width: 174px;
-      padding: 10px 14px;
-      border-radius: 999px;
-      background: rgba(21, 18, 13, .92);
-      color: #fff;
-      font-size: 13px;
+    .close {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #f0eee7;
+      font-size: 16px;
       font-weight: 900;
-      text-align: center;
-      transition: opacity .18s ease, transform .18s ease;
     }
 
-    .toast.show {
-      opacity: 1;
-      transform: translateX(-50%) translateY(0);
+    .drawer-grid {
+      display: grid;
+      grid-template-columns: 94px 1fr;
+      gap: 12px;
+    }
+
+    .drawer-img {
+      height: 146px;
+      border-radius: 18px;
+      overflow: hidden;
+      background: #eee;
+    }
+
+    .drawer-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .insights {
+      display: grid;
+      gap: 7px;
+    }
+
+    .insight {
+      padding: 9px;
+      border-radius: 14px;
+      background: #fff;
+      border: 1px solid rgba(23, 23, 23, 0.07);
+      font-size: 11px;
+      line-height: 1.28;
+    }
+
+    .insight b {
+      display: block;
+      margin-bottom: 3px;
+      font-size: 11px;
     }
 
     @media (max-width: 430px) {
-      .stage {
-        min-height: 100svh;
-        padding: 0;
-        display: block;
-      }
-
+      body { background: #fffdf8; }
+      .stage { padding: 0; min-height: 100vh; }
       .phone {
         width: 100vw;
-        height: 100svh;
+        height: 100vh;
+        min-height: 760px;
         border: 0;
         border-radius: 0;
         box-shadow: none;
       }
-
-      .phone::before {
-        display: none;
-      }
-
-      .app {
-        grid-template-rows: 78px 1fr 86px;
-      }
-
-      .topbar {
-        padding-top: max(18px, env(safe-area-inset-top));
-      }
+      .phone::before { display: none; }
     }
   </style>
 </head>
 <body>
   <main class="stage">
-    <section class="phone" aria-label="点淘 AI 每日穿搭 App 预览">
+    <section class="phone" aria-label="点淘 AI 风格分身交互原型">
       <div class="app">
-        <header class="topbar">
-          <div>
-            <p class="eyebrow">点淘 AI · 每日穿搭</p>
-            <h1>今天穿什么？</h1>
-          </div>
-          <div class="context">
-            <strong id="weatherText">杭州 29℃</strong>
-            <strong id="sceneLabel">通勤后小聚</strong>
+        <div class="status">
+          <span>09:41</span>
+          <span>5G 100%</span>
+        </div>
+
+        <header class="top">
+          <div class="head">
+            <div class="title">
+              <div class="avatar"><img src="daily-outfit-assets/1.jpg" alt="用户穿搭头像"></div>
+              <div>
+                <h1>点淘风格分身</h1>
+                <p>发现灵感、日推穿搭、沉淀我的风格</p>
+              </div>
+            </div>
           </div>
         </header>
 
-        <div class="content">
-          <section class="hero-card" id="heroCard">
-            <img id="heroImage" src="daily-outfit-assets/1.jpg" alt="今日推荐穿搭" />
-            <div class="hero-shade"></div>
-            <div class="hero-top">
-              <span class="style-chip" id="styleChip">甜酷 · 工装</span>
-              <div class="fit-score" id="fitScore">86</div>
+        <section class="content" id="content">
+          <section class="screen" id="mirror">
+            <article class="hero-card">
+              <img class="hero-img" src="daily-outfit-assets/2.jpg" alt="用户风格解析上身图">
+              <div class="hero-shade"></div>
+              <div class="hero-copy">
+                <span class="eyebrow">冷启风格解析</span>
+                <h2>你的主路线是轻学院酷感</h2>
+                <p>小个子、梨形轻微、偏好酷甜但怕显幼；系统先用视觉对比帮你缩小方向。</p>
+              </div>
+            </article>
+
+            <div class="quick-row">
+              <div class="metric"><strong>42%</strong><span>轻学院是最稳定主风格</span></div>
+              <div class="metric"><strong>31%</strong><span>酷感通勤适合作为升级线</span></div>
+              <div class="metric"><strong>3类</strong><span>版型、领口、配色优先判断</span></div>
             </div>
-            <div class="hero-copy">
-              <h2 id="lookTitle">甜酷工装，今天不费力</h2>
-              <p id="lookSummary">黑色收上半身，迷彩负责风格，波点鞋把硬朗感拉回俏皮。</p>
+
+            <div class="section-title">
+              <div>
+                <h2>风格地图</h2>
+                <p>不是给你贴标签，而是看哪些方向穿在你身上成立。</p>
+              </div>
             </div>
+
+            <article class="card">
+              <div class="style-map">
+                <div class="bar"><span>轻学院</span><div class="bar-track"><div class="bar-fill" style="--w: 42%; --c: #dfff5f"></div></div><span>42</span></div>
+                <div class="bar"><span>酷通勤</span><div class="bar-track"><div class="bar-fill" style="--w: 31%; --c: #d9ecff"></div></div><span>31</span></div>
+                <div class="bar"><span>日系松弛</span><div class="bar-track"><div class="bar-fill" style="--w: 18%; --c: #dff5e7"></div></div><span>18</span></div>
+                <div class="bar"><span>法式甜感</span><div class="bar-track"><div class="bar-fill" style="--w: 9%; --c: #ffe0dc"></div></div><span>9</span></div>
+              </div>
+            </article>
+
+            <div class="section-title">
+              <div>
+                <h2>可视化对比</h2>
+                <p>点击路线，看看“推荐、可尝试、谨慎”的差异。</p>
+              </div>
+            </div>
+
+            <div class="pill-row" id="routePills">
+              <button class="pill active" data-route="base">稳定路线</button>
+              <button class="pill" data-route="upgrade">升级路线</button>
+              <button class="pill" data-route="explore">探索路线</button>
+            </div>
+
+            <div class="compare-grid" id="compareGrid"></div>
+
+            <article class="card">
+              <div class="section-title">
+                <h2>最适合你的服装特征</h2>
+                <p>先看特征，再看商品。</p>
+              </div>
+              <div class="feature-grid">
+                <div class="feature"><b>版型</b><span>短上衣、高腰直筒、轻 A 字，保留腰线。</span></div>
+                <div class="feature"><b>领口</b><span>小圆领、微方领、窄 V，避免过大娃娃领。</span></div>
+                <div class="feature"><b>材质</b><span>软挺牛仔、细针织、轻薄衬衫，少选塌软厚料。</span></div>
+                <div class="feature"><b>配色</b><span>冷灰蓝、黑白、低饱和粉，少用高荧光色。</span></div>
+              </div>
+            </article>
           </section>
 
-          <div class="scene-row" aria-label="场景切换">
-            <button class="scene-btn" data-scene="work" aria-pressed="true">通勤</button>
-            <button class="scene-btn" data-scene="date" aria-pressed="false">约会</button>
-            <button class="scene-btn" data-scene="trip" aria-pressed="false">出游</button>
-          </div>
+          <section class="screen" id="today">
+            <div class="section-title">
+              <div>
+                <h2>今天你想以什么形象出现？</h2>
+                <p>结合杭州小雨、通勤后小聚和你的风格地图。</p>
+              </div>
+            </div>
 
-          <section class="ai-card" aria-label="AI 推荐理由">
-            <div class="ai-card-head">
-              <b>为什么今天推荐它</b>
-              <span id="closetLabel">衣橱已有 70%</span>
+            <div class="pill-row" id="scenePills">
+              <button class="pill active" data-scene="commute">通勤后小聚</button>
+              <button class="pill" data-scene="client">见客户</button>
+              <button class="pill" data-scene="weekend">周末咖啡</button>
+              <button class="pill" data-scene="rain">下雨出门</button>
             </div>
-            <div class="reason-stack">
-              <div class="reason-pill">
-                <i>我</i>
+
+            <article class="card today-card">
+              <div class="today-img"><img id="todayImg" src="daily-outfit-assets/3.jpg" alt="今日穿搭上身图"></div>
+              <div class="today-info">
                 <div>
-                  <b>结合你这个人</b>
-                  <span id="personalText">158cm、小个子、梨形轻微；你偏好甜酷/轻学院，但不想太用力。</span>
+                  <div class="score" id="todayScore">88</div>
+                  <h2 id="todayTitle">短上衣 + 高腰裙裤</h2>
+                  <p id="todaySub">显高、轻酷、有一点聚会感，不会像正式工装。</p>
                 </div>
+                <div class="mini-list" id="todayReasons"></div>
+                <button class="cta" id="wearBtn">今天穿这套</button>
               </div>
-              <div class="reason-pill blue">
-                <i>法</i>
-                <div>
-                  <b>搭配方法依据</b>
-                  <span id="methodText">错鞋调性法 + 焦点只保留一个：用波点鞋降低工装硬度。</span>
-                </div>
-              </div>
-              <div class="reason-pill red">
-                <i>险</i>
-                <div>
-                  <b>需要避开的坑</b>
-                  <span id="riskText">正式会议不建议；若担心压个子，把短裤换高腰款。</span>
-                </div>
-              </div>
+            </article>
+
+            <div class="closet-row">
+              <div class="closet"><b>衣橱已有</b><span id="ownedText">黑色针织、棕色包</span></div>
+              <div class="closet"><b>建议补齐</b><span id="gapText">高腰工装短裤</span></div>
+              <div class="closet"><b>风险提醒</b><span id="riskText">长外套会压个子</span></div>
             </div>
-            <button class="open-sheet" id="openSheet">看完整理由与缺口单品</button>
+
+            <article class="card">
+              <div class="section-title">
+                <h2>今日微变化</h2>
+                <p>不推翻整套，只调整一个变量。</p>
+              </div>
+              <div class="feature-grid">
+                <div class="feature"><b>更松弛</b><span>把黑色针织换成白 T，保留高腰和同色鞋。</span></div>
+                <div class="feature"><b>更有气场</b><span>加短西装，肩线收住，弱化梨形下半身。</span></div>
+              </div>
+            </article>
           </section>
 
-          <div class="bento-head">
-            <b>今日 Bento</b>
-            <span>直穿 · 衣橱 · 灵感 · 缺口</span>
-          </div>
-          <div class="look-strip" id="lookStrip" aria-label="更多穿搭推荐"></div>
-        </div>
+          <section class="screen active" id="life">
+            <div class="section-title">
+              <div>
+                <h2>逛他人生活方式</h2>
+                <p>看到喜欢的审美，不只收藏，先试到你身上。</p>
+              </div>
+            </div>
 
-        <footer class="bottom-bar">
-          <button class="primary" id="wearBtn">今天穿这套</button>
-          <button class="icon-btn" id="likeBtn" aria-label="喜欢">♡</button>
-          <button class="icon-btn" id="moreBtn" aria-label="更多类似">⋯</button>
-        </footer>
+            <div class="pill-row">
+              <button class="pill active">为你筛选</button>
+              <button class="pill">城市轻户外</button>
+              <button class="pill">艺术馆约会</button>
+              <button class="pill">新中式日常</button>
+            </div>
+
+            <div class="feed" id="lifeFeed"></div>
+          </section>
+        </section>
+
+        <nav class="bottom-nav" aria-label="底部导航">
+          <button class="nav-btn active" data-screen="life">发现</button>
+          <button class="nav-btn" data-screen="today">日推</button>
+          <button class="nav-btn" data-screen="mirror">我的</button>
+        </nav>
       </div>
 
-      <div class="sheet-backdrop" id="sheetBackdrop" aria-hidden="true">
-        <div class="sheet" role="dialog" aria-modal="true" aria-label="完整推荐理由">
-          <div class="grabber"></div>
-          <h3 id="sheetTitle">完整推荐理由</h3>
-          <div class="sheet-grid">
-            <div class="sheet-item">
-              <b>适合度判断</b>
-              <p id="sheetFit">这套适合你的身高比例和今日轻通勤场景。</p>
-            </div>
-            <div class="sheet-item">
-              <b>搭配理论</b>
-              <p id="sheetMethod">错鞋调性法、焦点控制、上短下长等方法共同成立。</p>
-            </div>
-            <div class="sheet-item">
-              <b>衣橱/购买证据</b>
-              <p id="sheetEvidence">你已有 2 件相关单品，只需补一件就能激活更多搭法。</p>
-            </div>
-            <div class="sheet-item">
-              <b>替代建议</b>
-              <p id="sheetAlt">如果要更稳，可以换高腰短裤或更短上衣。</p>
-            </div>
+      <aside class="drawer" id="drawer" aria-live="polite">
+        <div class="handle"></div>
+        <div class="drawer-head">
+          <div>
+            <h2 id="drawerTitle">为什么推荐这套</h2>
+            <p id="drawerSub">把内容、场景和你本人对齐。</p>
           </div>
-          <button class="close-sheet" id="closeSheet">知道了</button>
+          <button class="close" id="closeDrawer" aria-label="关闭">×</button>
         </div>
-      </div>
-
-      <div class="toast" id="toast">已更新</div>
+        <div class="drawer-grid">
+          <div class="drawer-img"><img id="drawerImg" src="daily-outfit-assets/4.jpg" alt="试穿结果"></div>
+          <div class="insights" id="drawerInsights"></div>
+        </div>
+      </aside>
     </section>
   </main>
 
   <script>
-    const sceneDelta = { work: 0, date: 2, trip: 4 };
-    const sceneCopy = {
-      work: '通勤后小聚',
-      date: '约会拍照',
-      trip: '周末出游'
+    const routeData = {
+      base: [
+        { img: "daily-outfit-assets/2.jpg", tag: "最推荐", title: "轻学院酷感", desc: "短上衣和浅色下装让比例更干净。" },
+        { img: "daily-outfit-assets/5.jpg", tag: "可尝试", title: "日系松弛", desc: "舒适但要收住腰线，避免过宽。" },
+        { img: "daily-outfit-assets/8.jpg", tag: "谨慎", title: "高甜 Y2K", desc: "容易显幼，适合小面积点缀。" }
+      ],
+      upgrade: [
+        { img: "daily-outfit-assets/4.jpg", tag: "最推荐", title: "酷感通勤", desc: "短外套、窄领口提升利落感。" },
+        { img: "daily-outfit-assets/7.jpg", tag: "可尝试", title: "低调老钱", desc: "材质要轻，不然会显成熟。" },
+        { img: "daily-outfit-assets/10.jpg", tag: "谨慎", title: "强工装", desc: "口袋过多会放大下半身体量。" }
+      ],
+      explore: [
+        { img: "daily-outfit-assets/6.jpg", tag: "最推荐", title: "城市轻户外", desc: "机能感保留，颜色降饱和。" },
+        { img: "daily-outfit-assets/9.jpg", tag: "可尝试", title: "新中式日常", desc: "用短款和窄领做现代化。" },
+        { img: "daily-outfit-assets/3.jpg", tag: "谨慎", title: "法式甜感", desc: "可取配色，不建议全套照搬。" }
+      ]
     };
 
-    const looks = [
-      {
-        id: 1,
-        image: 'daily-outfit-assets/1.jpg',
-        type: '直穿',
-        style: '甜酷 · 工装',
-        title: '甜酷工装，今天不费力',
-        summary: '黑色收上半身，迷彩负责风格，波点鞋把硬朗感拉回俏皮。',
-        score: 86,
-        closet: 70,
-        personal: '158cm、小个子、梨形轻微；你偏好甜酷/轻学院，但不想太用力。',
-        method: '错鞋调性法 + 焦点只保留一个：用波点鞋降低工装硬度，让迷彩只做一个主角。',
-        risk: '正式会议不建议；若担心压个子，把短裤换高腰款，或选更短上衣保留腰线。',
-        fit: '这套把视觉重点放在上半身和鞋子，小个子不会被长外套压住，梨形也不会把焦点集中在胯部。',
-        evidence: '你已买过黑色针织和棕色包；只需补一件高腰工装短裤，就能激活 3 套周末 Look。',
-        alt: '想更稳就换高腰 A 字短裤；想更甜就把迷彩换成深色百褶短裙。'
-      },
-      {
-        id: 2,
-        image: 'daily-outfit-assets/2.jpg',
-        type: '衣橱',
-        style: '学院 · 工装',
-        title: '蓝衬衫把工装变干净',
-        summary: '领带提高秩序感，宽裤和帽子保留松弛。',
-        score: 82,
-        closet: 78,
-        personal: '你喜欢轻学院但不想太乖，这套比纯衬衫通勤更有态度。',
-        method: '正式度梯度调节：领带提升正式度，工装裤和波点鞋降低严肃感。',
-        risk: '上装和下装都偏宽，小个子需要塞衣角或换短衬衫，否则容易五五分。',
-        fit: '蓝衬衫能提亮脸部，领带把风格收住，适合轻通勤和创意办公场景。',
-        evidence: '你衣橱里已有蓝衬衫和工装裤；缺一条细条纹领带，就能把基础衬衫变成风格锚点。',
-        alt: '如果担心过于学院，可去掉领带，换成更硬挺的小包。'
-      },
-      {
-        id: 3,
-        image: 'daily-outfit-assets/3.jpg',
-        type: '灵感',
-        style: '格纹 · 叠穿',
-        title: '格纹 + 针织，像认真搭过',
-        summary: '衬衫露出领口袖口，黑针织负责收束。',
-        score: 79,
-        closet: 45,
-        personal: '你的甜酷风格可以往轻学院迁移，这套不需要大面积换风格。',
-        method: '厚薄层次递进 + 统一一个变量：衬衫做薄内层，黑针织收束，蓝色系贯穿上下装。',
-        risk: '格纹和浅色阔腿裤会增加体量，梨形用户要保持上短下长，不要选过长针织。',
-        fit: '短针织能保留腰线，比长开衫更适合你的小个子比例。',
-        evidence: '如果你已有格纹衬衫，只需补短款黑针织；它还能搭吊带、连衣裙和浅色裤。',
-        alt: '想更显高，把阔腿裤换成浅色直筒裤；想更甜，加一个小胸针。'
-      },
-      {
-        id: 4,
-        image: 'daily-outfit-assets/4.jpg',
-        type: '灵感',
-        style: '艺术 · 软糯',
-        title: '灰开衫让花裤子日常化',
-        summary: '花裤是主角，灰白上半身把它压回可穿范围。',
-        score: 76,
-        closet: 40,
-        personal: '你想要一点艺术感，但日常通勤偏安全，这套适合周末展览。',
-        method: '图案繁简平衡 + 上短下长：花裤子做唯一焦点，短开衫保留腰线。',
-        risk: '花裤对通勤场景风险偏高；若本周没有展览或周末出门，不建议冲动买。',
-        fit: '短开衫能稳住比例，避免花色宽裤把下半身视觉放大。',
-        evidence: '灰色短开衫是高复用单品，可连接花裤、牛仔裤、吊带裙，适合做衣橱基础补位。',
-        alt: '想更日常，把花裤换成低饱和图案裤；想更利落，把开衫换短西装。'
-      },
-      {
-        id: 5,
-        image: 'daily-outfit-assets/5.jpg',
-        type: '缺口',
-        style: '童趣 · 出片',
-        title: '短裙是出片款，不是通勤款',
-        summary: '它符合理想自我，但不一定符合高频场景。',
-        score: 72,
-        closet: 35,
-        personal: '它符合你“有趣、甜酷”的理想自我，但和日常通勤频率不完全匹配。',
-        method: '大图案做主角：短裙已经足够强，衬衫、包和鞋都要退后。',
-        risk: '童趣元素过多可能显幼。没有拍照或活动场景时，闲置风险高。',
-        fit: '短裙能拉长腿部留白，但需要鞋包降低甜度，否则容易过度学生感。',
-        evidence: '如果喜欢这个结构，先买黑色 A 字短裙更稳，可搭蓝衬衫、黑针织、白 T。',
-        alt: '想保留趣味但提高穿着率，选低图案黑色 A 字裙。'
-      },
-      {
-        id: 6,
-        image: 'daily-outfit-assets/6.jpg',
-        type: '衣橱',
-        style: '清爽 · 通勤',
-        title: '浅色下装让衬衫更轻',
-        summary: '蓝白浅色系减少切割，适合热天通勤。',
-        score: 84,
-        closet: 68,
-        personal: '你今天在意清爽和显高，浅色系比深色裤更轻。',
-        method: '同色系拉长法 + 配饰风格翻译：浅色连续让比例更轻，小胸针补完成度。',
-        risk: '浅色下装对胯腿敏感，需要选直筒和垂坠面料；长时间户外不耐脏。',
-        fit: '浅色直筒裤能弱化腿型边界，蓝色上装也更衬脸。',
-        evidence: '浅色直筒裤能同时搭蓝衬衫、灰开衫、黑针织，是一件能激活多套的缺口单品。',
-        alt: '如果担心显胯，换成更挺括的浅灰直筒裤。'
-      },
-      {
-        id: 7,
-        image: 'daily-outfit-assets/7.jpg',
-        type: '缺口',
-        style: '低饱和 · 图案',
-        title: '一条花裤子激活基础上衣',
-        summary: '基础上衣多时，低饱和图案裤能提供新鲜感。',
-        score: 77,
-        closet: 52,
-        personal: '你的衣橱基础上衣多，这类裤子能让黑白灰上衣不再无聊。',
-        method: '中性色承托法 + 焦点只保留一个：上半身安静，裤子负责表达风格。',
-        risk: '梨形用户要避开胯部高对比图案，否则视觉焦点会落在胯腿。',
-        fit: '只要图案不集中在胯部，阔腿线条能替代真实腿型线条。',
-        evidence: '购买前至少生成三套已有上衣搭法；若搭不满三套，就不建议买。',
-        alt: '想降低风险，选竖向图案或低对比色块。'
-      },
-      {
-        id: 8,
-        image: 'daily-outfit-assets/8.jpg',
-        type: '直穿',
-        style: '短开衫 · 显高',
-        title: '短开衫比长外套更稳',
-        summary: '短开衫保留腰线，浅色直筒裤拉开比例。',
+    const sceneData = {
+      commute: {
         score: 88,
-        closet: 92,
-        personal: '这是最符合你“小个子、轻通勤、低焦虑”的安全答案。',
-        method: '上短下长比例法：短开衫保留腰线，浅色直筒裤拉开下半身比例。',
-        risk: '过于基础，拍照记忆点弱；内搭过长会破坏比例。',
-        fit: '这套几乎不增加身材风险，适合早上赶时间直接穿。',
-        evidence: '主要来自已有衣橱；如果晚上见朋友，加一只更有存在感的包即可。',
-        alt: '想更有风格，把平底鞋换成波点鞋或亮色包。'
+        img: "daily-outfit-assets/3.jpg",
+        title: "短上衣 + 高腰裙裤",
+        sub: "显高、轻酷、有一点聚会感，不会像正式工装。",
+        owned: "黑色针织、棕色包",
+        gap: "高腰工装短裤",
+        risk: "长外套会压个子",
+        reasons: [
+          "你的身高和比例更吃腰线，短上衣能把视觉重心上移。",
+          "小雨天气避免拖地裤，裙裤/短裤更利落。",
+          "酷感配色保留你的偏好，浅色下装让整体更轻。"
+        ]
+      },
+      client: {
+        score: 84,
+        img: "daily-outfit-assets/4.jpg",
+        title: "短西装 + 直筒裤",
+        sub: "专业但不老气，适合需要被认真对待的场景。",
+        owned: "黑色上衣、直筒牛仔",
+        gap: "短款轻西装",
+        risk: "宽肩长西装会吞比例",
+        reasons: [
+          "短西装比长西装更适合小个子，保留腿长。",
+          "直筒裤弱化梨形轮廓，比紧身裤更稳。",
+          "低饱和蓝灰能延续你的冷感风格。"
+        ]
+      },
+      weekend: {
+        score: 91,
+        img: "daily-outfit-assets/5.jpg",
+        title: "白 T + A 字短裙",
+        sub: "轻松、年轻、拍照友好，不需要太多搭配成本。",
+        owned: "白 T、运动鞋",
+        gap: "A 字短裙",
+        risk: "过蓬裙摆会显下半身重",
+        reasons: [
+          "A 字线条对梨形更友好，收腰但不贴胯。",
+          "白 T 降低风格压力，适合周末随意出门。",
+          "鞋包用深色压住甜感，避免显幼。"
+        ]
+      },
+      rain: {
+        score: 86,
+        img: "daily-outfit-assets/6.jpg",
+        title: "短衬衫 + 九分直筒裤",
+        sub: "适合小雨通勤，清爽、好走、不拖沓。",
+        owned: "短衬衫、帆布鞋",
+        gap: "防泼水直筒裤",
+        risk: "阔腿长裤会吸水且压个子",
+        reasons: [
+          "九分裤露出脚踝，让小个子下半身更轻。",
+          "短衬衫保留结构感，雨天也不显狼狈。",
+          "防泼水材质解决履约场景，不只是好看。"
+        ]
+      }
+    };
+
+    const lifeData = [
+      {
+        img: "daily-outfit-assets/6.jpg",
+        title: "城市轻户外的一天",
+        desc: "适合你尝试的不是硬核机能，而是低饱和、轻量、可通勤的户外感。",
+        chips: ["低饱和", "短外套", "轻机能"],
+        keep: "保留短外套和轻量材质",
+        replace: "把宽大工装裤换成九分直筒",
+        proof: "对你更友好：不压个子，梨形下半身也不会被口袋放大"
       },
       {
-        id: 9,
-        image: 'daily-outfit-assets/9.jpg',
-        type: '灵感',
-        style: '蓝白 · 低风险',
-        title: '蓝白格纹适合低风险试新',
-        summary: '颜色安全，风格明确，不容易翻车。',
-        score: 81,
-        closet: 62,
-        personal: '你想探索轻学院，但不想太幼；蓝白格纹是低风险入口。',
-        method: '小图案更日常 + 上下呼应：格纹尺度不大，蓝白贯穿上下装。',
-        risk: '学院感过强时容易显幼；可用硬挺包或乐福鞋压住。',
-        fit: '格纹靠近脸部能增加清爽感，浅色下装减少沉重。',
-        evidence: '蓝白格纹衬衫可单穿、叠穿、当外套，是一件能复用的迁移单品。',
-        alt: '想更成熟，把平底鞋换成乐福鞋。'
+        img: "daily-outfit-assets/9.jpg",
+        title: "新中式日常化",
+        desc: "把中式元素做小，而不是把整套风格做满，适合你的轻酷底色。",
+        chips: ["窄领口", "短款", "冷灰蓝"],
+        keep: "保留盘扣/斜襟的识别点",
+        replace: "把长袍感换成短上衣和直筒裤",
+        proof: "对你更友好：有风格记忆点，但不会显得隆重或压身高"
       },
       {
-        id: 10,
-        image: 'daily-outfit-assets/10.jpg',
-        type: '缺口',
-        style: '出片 · 半裙',
-        title: '它很出片，但要先判断场景',
-        summary: '适合旅行和展览，不适合作为通勤首选。',
-        score: 73,
-        closet: 32,
-        personal: '这更像你的理想自我：有趣、出片、有记忆点；但不符合高频通勤。',
-        method: '场景先于风格 + 大图案做主角：先确认真实出现场景，再决定是否购买。',
-        risk: '闲置风险高，需要基础上衣和低存在感鞋包配合，否则搭配成本会上升。',
-        fit: '半裙能制造轻盈感，但图案太强会把焦点放到下半身。',
-        evidence: '若本月有旅行或展览，可作为出片款；日常优先选低饱和、低图案版本。',
-        alt: '想提高穿着率，选低饱和图案半裙。'
+        img: "daily-outfit-assets/7.jpg",
+        title: "艺术馆约会感",
+        desc: "重点不是甜，而是干净、有距离感，再用一个亮点让照片成立。",
+        chips: ["黑白", "短上身", "亮点配饰"],
+        keep: "保留黑白主色和收腰比例",
+        replace: "把大面积蕾丝换成细节配饰",
+        proof: "对你更友好：风格更成熟，但不会丢掉年轻感"
       }
     ];
 
-    let activeId = 1;
-    let activeScene = 'work';
-    let liked = false;
+    const tabs = document.querySelectorAll(".nav-btn");
+    const screens = document.querySelectorAll(".screen");
+    const content = document.getElementById("content");
+    const drawer = document.getElementById("drawer");
+    const drawerTitle = document.getElementById("drawerTitle");
+    const drawerSub = document.getElementById("drawerSub");
+    const drawerImg = document.getElementById("drawerImg");
+    const drawerInsights = document.getElementById("drawerInsights");
 
-    const $ = (id) => document.getElementById(id);
-    const look = () => looks.find((item) => item.id === activeId) || looks[0];
-
-    function adjustedScore(item) {
-      return Math.min(96, Math.max(58, item.score + sceneDelta[activeScene]));
+    function showScreen(id) {
+      screens.forEach(screen => screen.classList.toggle("active", screen.id === id));
+      tabs.forEach(tab => tab.classList.toggle("active", tab.dataset.screen === id));
+      content.scrollTo({ top: 0, behavior: "smooth" });
+      drawer.classList.remove("open");
     }
 
-    function render() {
-      const item = look();
-      const currentSrc = $('heroImage').getAttribute('src');
-      if (currentSrc !== item.image) {
-        $('heroCard').classList.add('switching');
-        window.setTimeout(() => {
-          $('heroImage').src = item.image;
-          $('heroImage').alt = item.title;
-          $('heroCard').classList.remove('switching');
-        }, 120);
-      }
-      $('sceneLabel').textContent = sceneCopy[activeScene];
-      $('styleChip').textContent = item.style;
-      $('fitScore').textContent = adjustedScore(item);
-      $('lookTitle').textContent = item.title;
-      $('lookSummary').textContent = item.summary;
-      $('closetLabel').textContent = `衣橱已有 ${item.closet}%`;
-      $('personalText').textContent = item.personal;
-      $('methodText').textContent = item.method;
-      $('riskText').textContent = item.risk;
-      $('sheetTitle').textContent = item.title;
-      $('sheetFit').textContent = item.fit;
-      $('sheetMethod').textContent = item.method;
-      $('sheetEvidence').textContent = item.evidence;
-      $('sheetAlt').textContent = item.alt;
+    tabs.forEach(tab => {
+      tab.addEventListener("click", () => showScreen(tab.dataset.screen));
+    });
 
-      document.querySelectorAll('.look-card').forEach((button) => {
-        button.setAttribute('aria-pressed', String(Number(button.dataset.id) === activeId));
+    function renderCompare(route) {
+      const grid = document.getElementById("compareGrid");
+      grid.textContent = "";
+      routeData[route].forEach(item => {
+        const card = document.createElement("button");
+        card.className = "compare";
+        const img = document.createElement("img");
+        img.src = item.img;
+        img.alt = item.title;
+        const tag = document.createElement("span");
+        tag.className = "tag";
+        tag.textContent = item.tag;
+        const title = document.createElement("b");
+        title.textContent = item.title;
+        const desc = document.createElement("p");
+        desc.textContent = item.desc;
+        card.append(img, tag, title, desc);
+        card.addEventListener("click", () => openDrawer({
+          title: item.title,
+          sub: item.desc,
+          img: item.img,
+          insights: [
+            ["为什么成立", "系统用身高比例、梨形风险和历史偏好判断这条路线的适配度。"],
+            ["搭配方法", "先固定腰线和体量，再允许颜色或配饰做风格表达。"],
+            ["下一步", "保存为路线偏好，后续每日推荐会优先用这类结构。"]
+          ]
+        }));
+        grid.appendChild(card);
       });
     }
 
-    function renderStrip() {
-      const strip = $('lookStrip');
-      strip.innerHTML = '';
-      looks.forEach((item) => {
-        const button = document.createElement('button');
-        button.className = 'look-card';
-        button.dataset.id = String(item.id);
-        button.setAttribute('aria-pressed', String(item.id === activeId));
-        button.setAttribute('aria-label', `查看${item.title}`);
-
-        const image = document.createElement('img');
-        image.src = item.image;
-        image.alt = item.title;
-
-        const label = document.createElement('span');
-        label.innerHTML = `${item.type}<br>${item.title}`;
-
-        button.append(image, label);
-        strip.appendChild(button);
+    document.querySelectorAll("#routePills .pill").forEach(pill => {
+      pill.addEventListener("click", () => {
+        document.querySelectorAll("#routePills .pill").forEach(item => item.classList.remove("active"));
+        pill.classList.add("active");
+        renderCompare(pill.dataset.route);
       });
+    });
 
-      strip.querySelectorAll('.look-card').forEach((button) => {
-        button.addEventListener('click', () => {
-          activeId = Number(button.dataset.id);
-          render();
+    function renderToday(scene) {
+      const data = sceneData[scene];
+      document.getElementById("todayImg").src = data.img;
+      document.getElementById("todayScore").textContent = data.score;
+      document.getElementById("todayTitle").textContent = data.title;
+      document.getElementById("todaySub").textContent = data.sub;
+      document.getElementById("ownedText").textContent = data.owned;
+      document.getElementById("gapText").textContent = data.gap;
+      document.getElementById("riskText").textContent = data.risk;
+      const list = document.getElementById("todayReasons");
+      list.textContent = "";
+      data.reasons.forEach(reason => {
+        const row = document.createElement("div");
+        row.className = "mini";
+        row.innerHTML = `<span class="dot"></span><span>${reason}</span>`;
+        list.appendChild(row);
+      });
+    }
+
+    document.querySelectorAll("#scenePills .pill").forEach(pill => {
+      pill.addEventListener("click", () => {
+        document.querySelectorAll("#scenePills .pill").forEach(item => item.classList.remove("active"));
+        pill.classList.add("active");
+        renderToday(pill.dataset.scene);
+      });
+    });
+
+    function renderLifeFeed() {
+      const feed = document.getElementById("lifeFeed");
+      feed.textContent = "";
+      lifeData.forEach(item => {
+        const card = document.createElement("article");
+        card.className = "card life-card";
+        const imageWrap = document.createElement("div");
+        imageWrap.className = "life-img";
+        const img = document.createElement("img");
+        img.src = item.img;
+        img.alt = item.title;
+        const gradient = document.createElement("div");
+        gradient.className = "life-gradient";
+        const label = document.createElement("div");
+        label.className = "life-label";
+        const title = document.createElement("h2");
+        title.textContent = item.title;
+        const desc = document.createElement("p");
+        desc.textContent = item.desc;
+        label.append(title, desc);
+        imageWrap.append(img, gradient, label);
+
+        const body = document.createElement("div");
+        body.className = "life-body";
+        const chips = document.createElement("div");
+        chips.className = "chips";
+        item.chips.forEach(chipText => {
+          const chip = document.createElement("span");
+          chip.className = "chip";
+          chip.textContent = chipText;
+          chips.appendChild(chip);
         });
-      });
-    }
+        const actions = document.createElement("div");
+        actions.className = "life-actions";
+        const tryButton = document.createElement("button");
+        tryButton.className = "cta try";
+        tryButton.textContent = "试到我身上";
+        const saveButton = document.createElement("button");
+        saveButton.className = "secondary save";
+        saveButton.textContent = "收藏审美";
+        actions.append(tryButton, saveButton);
+        body.append(chips, actions);
+        card.append(imageWrap, body);
 
-    function toast(text) {
-      const box = $('toast');
-      box.textContent = text;
-      box.classList.add('show');
-      window.clearTimeout(toast.timer);
-      toast.timer = window.setTimeout(() => box.classList.remove('show'), 1500);
-    }
-
-    document.querySelectorAll('.scene-btn').forEach((button) => {
-      button.addEventListener('click', () => {
-        activeScene = button.dataset.scene;
-        document.querySelectorAll('.scene-btn').forEach((item) => {
-          item.setAttribute('aria-pressed', String(item === button));
+        tryButton.addEventListener("click", () => openDrawer({
+          title: "这套生活方式放到你身上",
+          sub: item.title,
+          img: item.img,
+          insights: [
+            ["可以保留", item.keep],
+            ["需要替换", item.replace],
+            ["适配证据", item.proof]
+          ]
+        }));
+        saveButton.addEventListener("click", (event) => {
+          event.currentTarget.textContent = "已收藏";
+          event.currentTarget.style.background = "#dfff5f";
         });
-        render();
+        feed.appendChild(card);
+      });
+    }
+
+    function openDrawer(payload) {
+      drawerTitle.textContent = payload.title;
+      drawerSub.textContent = payload.sub;
+      drawerImg.src = payload.img;
+      drawerInsights.textContent = "";
+      payload.insights.forEach(([label, text]) => {
+        const box = document.createElement("div");
+        box.className = "insight";
+        box.innerHTML = `<b>${label}</b>${text}`;
+        drawerInsights.appendChild(box);
+      });
+      drawer.classList.add("open");
+    }
+
+    document.getElementById("wearBtn").addEventListener("click", () => {
+      openDrawer({
+        title: "今日穿搭判断依据",
+        sub: "不是推荐单品，而是把你、天气、场景和搭配方法对齐。",
+        img: document.getElementById("todayImg").src,
+        insights: [
+          ["结合你这个人", "小个子和梨形轻微优先保留腰线，减少下半身横向膨胀。"],
+          ["搭配方法", "短上衣 + 高腰下装拉高比例，鞋包用低色差减少分割。"],
+          ["交易闭环", "已有 2 件可复用，只补 1 件缺口单品，降低试错成本。"]
+        ]
       });
     });
 
-    $('openSheet').addEventListener('click', () => {
-      $('sheetBackdrop').classList.add('open');
-      $('sheetBackdrop').setAttribute('aria-hidden', 'false');
-    });
+    document.getElementById("closeDrawer").addEventListener("click", () => drawer.classList.remove("open"));
 
-    $('closeSheet').addEventListener('click', () => {
-      $('sheetBackdrop').classList.remove('open');
-      $('sheetBackdrop').setAttribute('aria-hidden', 'true');
-    });
-
-    $('sheetBackdrop').addEventListener('click', (event) => {
-      if (event.target === $('sheetBackdrop')) {
-        $('sheetBackdrop').classList.remove('open');
-        $('sheetBackdrop').setAttribute('aria-hidden', 'true');
-      }
-    });
-
-    $('wearBtn').addEventListener('click', () => toast(`已设为今日穿搭：${look().title}`));
-    $('likeBtn').addEventListener('click', () => {
-      liked = !liked;
-      $('likeBtn').textContent = liked ? '♥' : '♡';
-      toast(liked ? '已记住你的偏好' : '已取消喜欢');
-    });
-    $('moreBtn').addEventListener('click', () => toast('已为你刷新相似灵感'));
-
-    renderStrip();
-    render();
+    renderCompare("base");
+    renderToday("commute");
+    renderLifeFeed();
   </script>
 </body>
 </html>
